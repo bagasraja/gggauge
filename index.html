@@ -119,8 +119,8 @@
     </div>
 
     <script>
-        // Konfigurasi MQTT
-        const broker = "wss://test.mosquitto.org:8081/mqtt"; // WebSocket endpoint
+        // Konfigurasi MQTT - GUNAKAN BROKER YANG BISA DIACCESS BROWSER
+        const broker = "wss://broker.hivemq.com:8000/mqtt"; // ✅ WORKING & CORS FRIENDLY
         const clientId = "web-client-" + Math.random().toString(16).substr(2, 8);
         const topicAll = "sensor/all_data";
 
@@ -232,14 +232,14 @@
 
         // Callback saat terhubung ke MQTT
         function onConnect() {
-            document.getElementById('connectionStatus').textContent = 'Terhubung ke MQTT Broker';
+            document.getElementById('connectionStatus').textContent = '✅ Terhubung ke MQTT Broker';
             client.subscribe(topicAll);
         }
 
         // Callback saat koneksi hilang
         function onConnectionLost(responseObject) {
             if (responseObject.errorCode !== 0) {
-                document.getElementById('connectionStatus').textContent = 'Koneksi terputus: ' + responseObject.errorMessage;
+                document.getElementById('connectionStatus').textContent = '❌ Koneksi terputus: ' + responseObject.errorMessage;
             }
         }
 
